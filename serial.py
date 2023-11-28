@@ -24,14 +24,14 @@ class SerialGenerator:
 
     def __init__(self,start):
         """sets the starting value to start"""
-        self.current_value = start - 1
-        self.starting_value = start - 1
+        self.previous_value = self.initial_counter_value = start - 1 #probably should be a diff name e.g. previous
+        #self.starting_value = start - 1#probably should be a diff name
 
     def generate(self):
         """increment the current value by one"""
-        self.current_value += 1
-        return self.current_value
+        self.previous_value += 1
+        return self.previous_value
 
     def reset(self):
         """resets the current value back to the starting value"""
-        self.current_value = self.starting_value
+        self.previous_value = self.initial_counter_value
