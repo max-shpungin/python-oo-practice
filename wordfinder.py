@@ -27,7 +27,7 @@ class WordFinder:
 
         txt_file = open(path)
         self.word_list = self.get_words_from_file(txt_file)
-        self.word_list = self.remove_new_lines(self.word_list)
+        self.word_list = self.parse_list(self.word_list)
         txt_file.close()
 
         print(f"{len(self.word_list)} words read")
@@ -45,7 +45,7 @@ class WordFinder:
         """Returns random word."""
         return random.choice(self.word_list)
 
-    def remove_new_lines(self, word_list):
+    def parse_list(self, word_list):
         """Takes a word_list and strips out new line chars"""
         clean_list = []
         for word in word_list:
@@ -72,15 +72,15 @@ class SpecialWordFinder(WordFinder):
 
     """
 
-    def __init__(self, path):
-        super().__init__(path)
-        print(self.word_list)
-        self.word_list = self.remove_blanks_and_hashes(self.word_list)
+    # def __init__(self, path):
+    #     super().__init__(path)
+    #     print(self.word_list)
+    #     self.word_list = self.remove_blanks_and_hashes(self.word_list)
 
     # we can reference the existing self.word_list
     # check if first char is space or hash and pop if so
 
-    def remove_blanks_and_hashes(self, word_list):
+    def parse_list(self, word_list):
         """Accepts word list, skips blanks and comments.
         Returns clean word list"""
 
@@ -88,7 +88,7 @@ class SpecialWordFinder(WordFinder):
 
         for line in word_list:
             if len(line) > 1 and not line.startswith('#'):
-                clean_list.append(line)
+                clean_list.append(line.strip())
         print(clean_list)
         return clean_list
 
